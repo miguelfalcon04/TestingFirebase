@@ -1,3 +1,22 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<div class="container">
+  <h1>Document Manager</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" formControlName="title" required />
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" required></textarea>
+    </div>
+    <button type="submit">{{ isEditing ? 'Update' : 'Create' }}</button>
+  </form>
+
+  <div *ngFor="let doc of documents">
+    <h2>{{ doc.title }}</h2>
+    <p>{{ doc.description }}</p>
+    <button (click)="editDocument(doc)">Edit</button>
+    <button (click)="deleteDocument(doc.id)">Delete</button>
+  </div>
+</div>
